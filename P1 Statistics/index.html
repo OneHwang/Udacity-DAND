@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="index.css">
+  <title> One Hwang - Stroop </title>
+</head>
+  <body>
+    <h3>
+      Stroop test analysis by One Hwang
+    </h3>
+    <p>
+      The purpose of this document is to fulfill the requirements for the Stroop Effect project in Udacity's Data Analysis nanodegree program. It responds to the tasks given <a href="https://docs.google.com/document/d/1-OkpZLjG_kX9J6LIQ5IltsqMzVWjh36QpnP2RYpVdPU/pub?embedded=True"> here </a>
+    </p>
+    <p>
+      <b> 1. What is our independent variable? What is our dependent variable? </b> The independent variable is type of word - congruent or incongruent. The dependent variable is participants' time to name colors.
+    </p>
+    <p>
+      <b> 2. What is an appropriate set of hypotheses for this task? What kind of statistical test do you expect to perform? Justify your choices. </b> Let
+      <math>
+        <msub>
+           &mu;
+          <mn>
+            c
+          </mn>
+        </msub>
+      </math>
+      represent the mean time for participants to name congruent colors and let
+      <math>
+        <msub>
+           &mu;
+          <mn>
+            i
+          </mn>
+        </msub>
+      </math>
+      represent the mean time for participants to name incongruent colors. Then,
+    </p>
+
+    <p>
+      <math>
+        <msub>H
+          <mn>
+            o
+          </mn>
+        </msub>
+        <mtext>: </mtext>
+        <mspace width="10px"> </mspace>
+        <msub>
+           &mu;
+          <mn>
+            i
+          </mn>
+        </msub>
+        <mo>-</mo>
+        <msub>
+           &mu;
+          <mn>
+            c
+          </mn>
+        </msub>
+        <mo>=</mo>
+        <mi>0</mi>
+      </math>
+    </p>
+    <p>
+      <math>
+        <msub>H
+          <mn>
+            A
+          </mn>
+        </msub>
+        <mtext>: </mtext>
+        <mspace width="10px"> </mspace>
+        <msub>
+           &mu;
+          <mn>
+            i
+          </mn>
+        </msub>
+        <mo>-</mo>
+        <msub>
+           &mu;
+          <mn>
+            c
+          </mn>
+        </msub>
+        <mo>></mo>
+        <mi>0</mi>
+      </math>
+    </p>
+    <p>
+      The null hypothesis says the average time to name incongruent colors minus the average time to name congruent colors is zero. The alternative hypothesis says that the average time to name incongruent colors is longer than the average time to name congruent colors. I would perform t-tests for dependent samples with
+      <math>
+        <mn>&alpha;</mn>
+        <mo>=</mo>
+        <mi>0.05</mi>
+      </math>
+      and one-tailed critical values:
+    </p>
+    <ul>
+      <li>We want to use t-tests because we want to compare the means of samples that are small (counts less than 30), we do not know the population standard deviations, and the distributions are not highly skewed.</li>
+      <li>We want to use dependent rather than independent sample tests because the samples involve the same participants.</li>
+      <li>We want one-tailed because the alternative hypothesis says the average time to name incongruent colors is greater than that for congruent colors.</li>
+    </ul>
+    <p>
+      <b>3. Report some descriptive statistics regarding this dataset. Include at least one measure of central tendency and at least one measure of variability.</b> Refer to this <a href="https://docs.google.com/spreadsheets/d/1SpYLHX4djGiWpQ-Xwxe-IVL4_xQ6aS5LNhJhgeH64w8/edit?usp=sharing"> spreadsheet </a> for all  calculations used to derive the results below in the Summary Statistics table.
+    </p>
+
+    <table>
+      <caption><b>Summary Statistics</b></caption>
+
+      <tr>
+        <th> </th>
+        <th>Congruent</th>
+        <th>Incongruent</th>
+        <th>Difference</th>
+      </tr>
+      <tr>
+        <th>
+          count,
+          <math>
+            <mspace width="0.2em"></mspace>
+            <mi>n</mi>
+          </math>
+        </th>
+        <td>24</td>
+        <td>24</td>
+        <td>24</td>
+      </tr>
+      <tr>
+        <th>
+          mean,
+          <math>
+            <mspace width="0.2em"></mspace>
+            <mover>
+              <mi>x</mi>
+              <mo>&#xaf;<!--MACRON--></mo>
+            </mover>
+          </math>
+          (seconds)
+        </th>
+        <td>14.051</td>
+        <td>22.016</td>
+        <td>7.965</td>
+      </tr>
+      <tr>
+        <th>median (seconds)</th>
+        <td>14.357</td>
+        <td>21.018</td>
+        <td>7.667</td>
+      </tr>
+        <th>
+          standard deviation,
+          <math>
+            <mspace width="0.2em"></mspace>
+            <mi>s</mi>
+          </math>
+          (seconds)
+          <math>
+            <msqrt>
+              <mfrac>
+                <mrow>
+                  <mo>&sum;</mo>
+                  <msup>
+                    <mrow>
+                      <mo>(</mo>
+                      <mi>x</mi>
+                      <mo>-</mo>
+                      <mover>
+                        <mi>x</mi>
+                        <mo>&#xaf;<!--MACRON--></mo>
+                      </mover>
+                      <mo>)</mo>
+                    </mrow>
+                    <mn>2</mn>
+                  </msup>
+                </mrow>
+                <mrow><mi>n-1</mi></mrow>
+              </mfrac>
+            </msqrt>
+          </math>
+        </th>
+        <td>3.559</td>
+        <td>4.797</td>
+        <td>4.865</td>
+    </table>
+    <p>
+      <b> 4. Provide one or two visualizations that show the distribution of the sample data. Write one or two sentences noting what you observe about the plot or plots? </b> The image below shows the number of participants as functions of test durations. It shows that people tend to take longer to name incongruent colors than congruent colors. While the distributions for both functions are slightly postively skewed, incongruent colors have a wider distribution.
+    </p>
+    <img src="histogram.png" alt="histogram stroop"></img>
+    <p>
+      <b> 5. Now, perform the statistical test and report your results. What is your confidence level and your critical statistic value? Do you reject the null hypothesis or fail to reject it? Come to a conclusion in terms of the experiment task. Did the results match up with your expectations? </b> Using the results below, I reject the null hypothesis. The t-static exceeds the t-critical value, and the p-value is very small. The results match up with my expectation that incongruent information makes it longer for people to correctly identify colors.
+    </p>
+    <table>
+      <caption>Dependent Sample T-test Results</caption>
+      <tr>
+        <th></th>
+        <th>calculation/reference</th>
+        <th>value</th>
+      </tr>
+      <tr>
+        <th>
+          confidence level,
+          <math>
+            <mspace width="0.2em"></mspace>
+            <mi>&alpha;</mi>
+          </math>
+        </th>
+        <td></td>
+        <td>
+          0.05
+        </td>
+      </tr>
+      <tr>
+        <th>
+          degrees of freedom,
+          <math>
+            <mrow>
+              <mi>n</mi>
+              <mo>-</mo>
+              <mi>1</mi>
+            </mrow>
+          </math>
+        </th>
+        <td>24 - 1</td>
+        <td>
+          23
+        </td>
+      </tr>
+      <tr>
+        <th>t-critical</th>
+        <td>
+          <a href="https://s3.amazonaws.com/udacity-hosted-downloads/t-table.jpg">
+            t distribution table
+          </a>
+        </td>
+        <td>1.714</td>
+      </tr>
+      <tr>
+        <th>
+          t-stat
+          <math>
+            <mfrac>
+              <mrow>
+                <mi>
+                  mean difference
+                </mi>
+              </mrow>
+              <mrow>
+                <mn>s</mn>
+                <mo>/</mo>
+                <msqrt>
+                  <mn>n</mn>
+                </msqrt>
+              </mrow>
+            </mfrac>
+          </math>
+        </th>
+        <td>
+          <math>
+            <mfrac>
+              <mrow>
+                <mi>7.965</mi>
+              </mrow>
+              <mrow>
+                <mi>4.865</mi>
+                <mo>/</mo>
+                <msqrt>
+                  <mi>24</mi>
+                </msqrt>
+              </mrow>
+            </mfrac>
+          </math>
+          <a href="https://docs.google.com/spreadsheets/d/1SpYLHX4djGiWpQ-Xwxe-IVL4_xQ6aS5LNhJhgeH64w8/edit?usp=sharing">spreadsheet </a>
+        </td>
+        <td>
+          8.021
+        </td>
+      </tr>
+      <tr>
+        <th>p-value</th>
+        <td>
+          <a href="http://www.socscistatistics.com/pvalues/tdistribution.aspx">
+            calculator for one-tailed
+          </a>
+        </td>
+        <td>less than 0.00001</td>
+      </tr>
+      <tr>
+        <th>
+          decision
+        </th>
+        <td>
+        </td>
+        <td>
+          reject the null hypothesis
+        </td>
+      </tr>
+    </table>
+    <p>
+      <b> 6. Optional: What do you think is responsible for the effects observed? Can you think of an alternative or similar task that would result in a similar effect? Some research about the problem will be helpful for thinking about these two questions! </b> I think incongruent colors take longer to identify because the participants have to suppress their knowledge of the meaning of the word. If people were asked to identify shapes that enclosed words such as "triangle", "square," and "star", we can expect them to take longer if the shape does not match the word than if the shape and word were congruent. 
+    </p>
+  </body>
+</html>
